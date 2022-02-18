@@ -5,26 +5,43 @@ from Course_Info import CourseInfo
 from Student_Info import StudentInfo
 from GE_Requirements import GeRequirements
 from Social_Behavioral_Areas import SocialBehavAreas
+from GE_Progress import GEProgress
+from GE_Courses_Report import GECompletionReport
 
 def degree_progess(student_id,  enrollment_history_df, ge_plan, ge_plan_list):
-    sinfo = StudentInfo(student_id=id, enrollment_history_df=enrollment_history_df)
+    planARequirements = {'Math_Proficiency': 0, 'Writing_Proficiency': 0, 'Reading_Proficiency': 0,
+                             'Health_Proficiency': 0, 'Nat_Sci': 0,
+                             'Soc_Sci': 0, 'FA_Hum': 0, 'Comp': 0, 'Analytic': 0}
+    sinfo = StudentInfo(student_id, enrollment_history_df=enrollment_history_df)
     degree_applicable_courses = sinfo.completed_courses()
     current_courses = coursInfo.current_courses()
     gereq = GeRequirements(degree_applicable_dict=degree_applicable_courses, ge_plan=ge_plan)
     ge_dataframe = gereq.construct_ge_dataframe()
     # gereq.ge_courses_completed(ge_dataframe=ge_dataframe)
     socbeh = SocialBehavAreas(degree_applicable_dict=degree_applicable_courses, ge_dataframe=ge_dataframe)
+    print('area', ge_plan_list)
     for area in ge_plan_list:
+        print('area', area)
         if area == 'Electives':
-            gereq.area_e_ge_requirements()
+            gereq.area_e_ge_requirements(ge_dataframe)
         if area == 'Reading_Proficiency':
             gereq.reading_proficiency()
         if area == 'Soc_Behav1' or area == 'Soc_Behav2' or area == 'Soc_Behav3':
-            socbeh.ge_courses_completed(area_name=area, ge_courses_completed=ge_courses_completed)
+            socbeh.ge_courses_completed(area_name=area, ge_courses_completed=geCoursesCompleted)
         else:
-            ge_courses_completed = gereq.ge_courses_completed(area_name=area, ge_dataframe=ge_dataframe)
+            geCoursesCompleted, ge_units_completed = gereq.ge_courses_completed(area_name=area, ge_dataframe=ge_dataframe)
     missing_ge_courses = gereq.ge_requirements_completed(ge_plan_list)
-
+    geProgress = GEProgress(completed_ge_courses=geCoursesCompleted, completed_ge_units=ge_units_completed, student_id=id,
+                            ge_plan_requirements=planARequirements)
+    missing_ge_courses, geCoursesCompleted, ge_units_completed = geProgress.ge_requirements_completed()
+    print('missing', missing_ge_courses, 'completed', geCoursesCompleted, 'units', ge_units_completed)
+    # ge_report = GECompletionReport(student_id, completed_ge_courses=ge_courses_completed,
+    #                                missing_ge_courses=missing_ge_courses, completed_ge_units=ge_units_completed,
+    #                                plan=plan,
+    #                                current_enrollment=enrolled_courses,
+    #                                first_term=semester,
+    #                                all_count=all_courses,
+    #                                passed_courses=eligible_courses)
 
 
 
@@ -50,6 +67,6 @@ for plan in GePlans:
         semester = coursInfo.first_term()
         catalogTerm = coursInfo.calculate_catalog_term()
         if plan == 'PlanA':
-            degree_progess(student_id=studID, enrollment_history_df=enrollment_history_df, ge_plan='PlanA_GE.csv',
+            degree_progess(student_id=id, enrollment_history_df=enrollment_history_df, ge_plan='PlanA_GE.csv',
                            ge_plan_list=planAList)
 
