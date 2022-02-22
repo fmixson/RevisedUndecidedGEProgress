@@ -22,3 +22,8 @@ class EnrollmentHistoryDataFrame:
         # nona_enrollment_history_df = nona_enrollment_history_df.reset_index(drop=True)
         # self.enrollment_history_df = nona_enrollment_history_df
         return self.enrollment_history_df
+
+    def completed_courses_df(self):
+        no_AED = self.enrollment_history_df['Class Subject'] != "AED"
+        no_AED_DF = self.enrollment_history_df[no_AED]
+        print(no_AED_DF)

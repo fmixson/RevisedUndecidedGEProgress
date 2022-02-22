@@ -57,6 +57,7 @@ Plan_C_list = ['Comp', 'Crit_Think', 'Oral_Comm', 'Math', 'Arts', 'Hum', 'Arts_H
 enrollment_history_file = fileopenbox('Upload Ernollment Histories', filetypes='*.csv')
 e = EnrollmentHistoryDataFrame(enrollment_history_file=enrollment_history_file)
 enrollment_history_df = e.create_dataframe()
+e.completed_courses_df()
 studID = StudentID(enrollment_history_df=enrollment_history_df)
 studIDList = studID.student_ids()
 
