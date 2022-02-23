@@ -23,7 +23,18 @@ class EnrollmentHistoryDataFrame:
         # self.enrollment_history_df = nona_enrollment_history_df
         return self.enrollment_history_df
 
-    def completed_courses_df(self):
+    def eligible_courses_df(self):
+        ineligibleCourses =[]
+        ineligible_courses = ['MATH 80A', 'MATH 60', 'ENGL 72', 'ENGL 52', 'ACLR 90', 'ACLR 91', 'ACLR 92', 'CHEM 95A',
+                              'CHEM 95B', 'CHEM 95C', 'CHEM 95D', 'CHEM 95E', 'CHEM 95F', 'LIBR 50', 'LAW 98', 'LAW 99',
+                              'BCOT 5A']
         no_AED = self.enrollment_history_df['Class Subject'] != "AED"
         no_AED_DF = self.enrollment_history_df[no_AED]
+        resetNoAED = no_AED_DF.reset_index(drop=True)
+        for i in range(len(resetNoAED)-1):
+            if resetNoAED.loc[i, 'Course'] in ineligible_courses:
+                ineligibleCourses.append(i)
+        eligibleCourses = resetNoAED.drop(ineligibleCourses)
+        eligibleCoursesDF = eligibleCourses.reset_index(drop=True)
+        return eligibleCoursesDF
         print(no_AED_DF)

@@ -12,7 +12,8 @@ def degree_progess(student_id,  enrollment_history_df, ge_plan, ge_plan_list):
     planARequirements = {'Math_Proficiency': 0, 'Writing_Proficiency': 0, 'Reading_Proficiency': 0,
                              'Health_Proficiency': 0, 'Nat_Sci': 0,
                              'Soc_Sci': 0, 'FA_Hum': 0, 'Comp': 0, 'Analytic': 0}
-    sinfo = StudentInfo(student_id, enrollment_history_df=enrollment_history_df)
+    eligibleCoursesDF=e.eligible_courses_df()
+    sinfo = StudentInfo(student_id, enrollment_history_df=eligibleCoursesDF)
     degree_applicable_courses = sinfo.completed_courses()
     current_courses = coursInfo.current_courses()
     gereq = GeRequirements(degree_applicable_dict=degree_applicable_courses, ge_plan=ge_plan)
@@ -57,7 +58,7 @@ Plan_C_list = ['Comp', 'Crit_Think', 'Oral_Comm', 'Math', 'Arts', 'Hum', 'Arts_H
 enrollment_history_file = fileopenbox('Upload Ernollment Histories', filetypes='*.csv')
 e = EnrollmentHistoryDataFrame(enrollment_history_file=enrollment_history_file)
 enrollment_history_df = e.create_dataframe()
-e.completed_courses_df()
+# eligibleCoursesDF = e.eligible_courses_df()
 studID = StudentID(enrollment_history_df=enrollment_history_df)
 studIDList = studID.student_ids()
 

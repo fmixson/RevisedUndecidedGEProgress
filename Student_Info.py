@@ -19,9 +19,9 @@ class StudentInfo:
     def completed_courses(self):
         for i in range(len(self.enrollment_history_df)):
             if self.student_id == self.enrollment_history_df.loc[i, "ID"]:
-                if self.enrollment_history_df.loc[i, "Class Subject"] != "AED":
-                    if self.enrollment_history_df.loc[i, "Course"] not in StudentInfo.ineligible_courses:
-                        if self.enrollment_history_df.loc[i, "Class Catalog Number"] not in StudentInfo.ineligible_numbers:
+                # if self.enrollment_history_df.loc[i, "Class Subject"] != "AED":
+                #     if self.enrollment_history_df.loc[i, "Course"] not in StudentInfo.ineligible_courses:
+                #         if self.enrollment_history_df.loc[i, "Class Catalog Number"] not in StudentInfo.ineligible_numbers:
                             course_number = self.enrollment_history_df.loc[i, "Class Catalog Number"]
                             if self.enrollment_history_df.loc[
                                 i, 'Class Catalog Number'] in StudentInfo.eligible_course_numbers1:
