@@ -8,7 +8,7 @@ from Social_Behavioral_Areas import SocialBehavAreas
 from GE_Progress import GEProgress
 from GE_Courses_Report import GECompletionReport
 
-def degree_progess(student_id,  enrollment_history_df, ge_plan, ge_plan_list):
+def degree_progess(student_id, enrollment_history_df, ge_plan, ge_plan_list):
     planARequirements = {'Math_Proficiency': 0, 'Writing_Proficiency': 0, 'Reading_Proficiency': 0,
                              'Health_Proficiency': 0, 'Nat_Sci': 0,
                              'Soc_Sci': 0, 'FA_Hum': 0, 'Comp': 0, 'Analytic': 0}
@@ -73,11 +73,11 @@ for plan in GePlans:
                            ge_plan_list=planAList)
         if plan == 'PlanB':
             if catalogTerm >= 1219:
-                degree_progess(student_id=id, enrollment_history=enrollment_history_df, ge_plan='PlanB_GE_2021.csv',
+                degree_progess(student_id=id, enrollment_history_df=enrollment_history_df, ge_plan='PlanB_GE_2021.csv',
                                 ge_plan_list=planBList21)
             else:
-                degree_progess(student_id=id, enrollment_history=enrollment_history_df, ge_plan='PlanB_GE.csv',
+                degree_progess(student_id=id, enrollment_history_df=enrollment_history_df, ge_plan='PlanB_GE.csv',
                                 ge_plan_list=planBList)
         else:
-            degree_progess(student_id=id, enrollment_history=enrollment_history_df, ge_plan='PlanC_GE.csv', ge_plan_list=Plan_C_list)
+            degree_progess(student_id=id, enrollment_history_df=enrollment_history_df, ge_plan='PlanC_GE.csv', ge_plan_list=PlanCList)
 
