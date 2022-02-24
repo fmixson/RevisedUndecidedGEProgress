@@ -9,7 +9,7 @@ class GECompletionReport:
     total_missing = []
     flat_list = []
     def __init__(self, student_id, completed_ge_courses, missing_ge_courses, completed_ge_units, plan, current_enrollment,
-                 first_term, all_count, passed_courses):
+                 first_term, passed_courses):
         self.student_id = student_id
         self.completed_ge_courses = completed_ge_courses
         self.missing_ge_courses = missing_ge_courses
@@ -17,7 +17,7 @@ class GECompletionReport:
         self.plan = plan
         self.current_enrollment = current_enrollment
         self.first_term = first_term
-        self.all_count = all_count
+        # self.all_count = all_count
         self.passed_courses = passed_courses
 
     def ge_completion(self):
