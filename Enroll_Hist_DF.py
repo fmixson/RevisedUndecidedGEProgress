@@ -37,4 +37,3 @@ class EnrollmentHistoryDataFrame:
         eligibleCourses = resetNoAED.drop(ineligibleCourses)
         eligibleCoursesDF = eligibleCourses.reset_index(drop=True)
         return eligibleCoursesDF
-        print(no_AED_DF)

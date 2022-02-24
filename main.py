@@ -48,11 +48,11 @@ def degree_progess(student_id,  enrollment_history_df, ge_plan, ge_plan_list):
 
 planAList = ['Math_Proficiency', 'Writing_Proficiency', 'Reading_Proficiency', 'Health_Proficiency', 'Nat_Sci', 'Soc_Sci',
              'Beh_Sci', 'FA_Hum', 'Comp', 'Analytic', 'Electives']
-Plan_B_list = ['Oral_Comm', 'Writ_Comm', 'Crit_Think', 'Phys_Sci', 'Bio_Sci', 'Sci_Labs', 'Math', 'Arts', 'Hum', 'Arts_Hum',
+planBList = ['Oral_Comm', 'Writ_Comm', 'Crit_Think', 'Phys_Sci', 'Bio_Sci', 'Sci_Labs', 'Math', 'Arts', 'Hum', 'Arts_Hum',
                'Amer_Hist', 'Amer_Gov', 'Institutions', 'Self_Dev']
-Plan_B_list_21 = ['Oral_Comm', 'Writ_Comm', 'Crit_Think', 'Phys_Sci', 'Bio_Sci', 'Sci_Labs', 'Math', 'Arts', 'Hum', 'Arts_Hum',
+planBList21 = ['Oral_Comm', 'Writ_Comm', 'Crit_Think', 'Phys_Sci', 'Bio_Sci', 'Sci_Labs', 'Math', 'Arts', 'Hum', 'Arts_Hum',
                'Amer_Hist_Gov', 'Institutions', 'Self_Dev', 'Ethnic_Stds']
-Plan_C_list = ['Comp', 'Crit_Think', 'Oral_Comm', 'Math', 'Arts', 'Hum', 'Arts_Hum', 'Soc_Behav1', 'Soc_Behav2', 'Soc_Behav3',
+PlanCList = ['Comp', 'Crit_Think', 'Oral_Comm', 'Math', 'Arts', 'Hum', 'Arts_Hum', 'Soc_Behav1', 'Soc_Behav2', 'Soc_Behav3',
                'Phys_Sci', 'Bio_Sci', 'Sci_Labs']
 
 enrollment_history_file = fileopenbox('Upload Ernollment Histories', filetypes='*.csv')
@@ -71,4 +71,13 @@ for plan in GePlans:
         if plan == 'PlanA':
             degree_progess(student_id=id, enrollment_history_df=enrollment_history_df, ge_plan='PlanA_GE.csv',
                            ge_plan_list=planAList)
+        if plan == 'PlanB':
+            if catalogTerm >= 1219:
+                degree_progess(student_id=id, enrollment_history=enrollment_history_df, ge_plan='PlanB_GE_2021.csv',
+                                ge_plan_list=planBList21)
+            else:
+                degree_progess(student_id=id, enrollment_history=enrollment_history_df, ge_plan='PlanB_GE.csv',
+                                ge_plan_list=planBList)
+        else:
+            degree_progess(student_id=id, enrollment_history=enrollment_history_df, ge_plan='PlanC_GE.csv', ge_plan_list=Plan_C_list)
 
