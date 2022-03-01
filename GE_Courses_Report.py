@@ -27,7 +27,8 @@ class GECompletionReport:
         GECompletionReport.GE_Progress_df.loc[length, 'Student_ID'] = self.student_id
         GECompletionReport.GE_Progress_df.loc[length, 'First_Term'] = self.first_term
 
-        total_ge_units = sum(self.completed_ge_units)
+        # total_ge_units = sum(self.completed_ge_units)
+        totalGEUnits = sum(item['units'] for item in self.completed_ge_units)
         GECompletionReport.GE_Progress_df.loc[length, 'GE_Plan'] = self.plan
 
         GECompletionReport.GE_Progress_df.loc[length, 'Missing_Num_GE_Courses'] = len(self.missing_ge_courses)
@@ -39,12 +40,12 @@ class GECompletionReport:
         GECompletionReport.GE_Progress_df.loc[length, 'GE_Courses'] = ge_courses_list
         GECompletionReport.GE_Progress_df.loc[length, 'Current_Enrollment'] = self.current_enrollment
         print('length', length)
-        self.all_count = dict(self.all_count)
+        # self.all_count = dict(self.all_count)
 
         print(GECompletionReport.GE_Progress_df)
-        print('all count', self.all_count)
-        all_count_list = self.all_count.items()
-        GECompletionReport.GE_Progress_df.loc[length, 'All_Courses'] = all_count_list
+        # print('all count', self.all_count)
+        # all_count_list = self.all_count.items()
+        # GECompletionReport.GE_Progress_df.loc[length, 'All_Courses'] = all_count_list
         passed_courses_list = self.passed_courses.items()
         GECompletionReport.GE_Progress_df.loc[length, 'Passed_Courses'] = passed_courses_list
 

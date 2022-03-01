@@ -50,7 +50,7 @@ def degree_progess(student_id, enrollment_history_df, ge_plan, ge_plan_list):
                                    first_term=semester,
                                    # all_count=all_courses,
                                    passed_courses=degree_applicable_courses)
-
+    ge_report.ge_completion()
 
 
 planAList = ['Math_Proficiency', 'Writing_Proficiency', 'Reading_Proficiency', 'Health_Proficiency', 'Nat_Sci', 'Soc_Sci',
@@ -75,6 +75,7 @@ for plan in GePlans:
         coursInfo = CourseInfo(student_id=id, enrollment_history_df=enrollment_history_df)
         semester = coursInfo.first_term()
         catalogTerm = coursInfo.calculate_catalog_term()
+        print('plan', plan)
         if plan == 'PlanA':
             degree_progess(student_id=id, enrollment_history_df=enrollment_history_df, ge_plan='PlanA_GE.csv',
                            ge_plan_list=planAList)
@@ -85,6 +86,6 @@ for plan in GePlans:
             else:
                 degree_progess(student_id=id, enrollment_history_df=enrollment_history_df, ge_plan='PlanB_GE.csv',
                                 ge_plan_list=planBList)
-        else:
+        if plan == 'PlanC':
             degree_progess(student_id=id, enrollment_history_df=enrollment_history_df, ge_plan='PlanC_GE.csv', ge_plan_list=PlanCList)
 GECompletionReport.GE_Progress_df.to_csv('C:/Users/fmixson/Desktop/Undecided_GE_Draft.csv')
