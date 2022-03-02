@@ -9,6 +9,7 @@ class GEProgress:
         self.missing_ge_courses = []
 
     def ge_requirements_completed(self):
+        print('progress ge plan req', self.ge_plan_requirements)
         for ge_key in self.ge_plan_requirements:
             if ge_key not in self.completed_ge_courses:
                 self.missing_ge_courses.append(ge_key)

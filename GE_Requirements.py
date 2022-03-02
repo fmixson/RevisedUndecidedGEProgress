@@ -50,6 +50,7 @@ class GeRequirements:
         return self.completed_ge_courses
 
     def reading_proficiency(self):
+        print('reading comp ge', self.completed_ge_courses)
         if 'Reading Proficiency' not in self.completed_ge_courses:
             # totalGEUnits = sum(item['units'] for item in self.completed_ge_units)
             if sum(item['units'] for item in self.completed_ge_units) >= 12:
