@@ -4,7 +4,7 @@ from Student_Info import StudentInfo
 class CourseInfo(StudentInfo):
 
     def current_courses(self):
-        current_term = 1219
+        current_term = 1223
         self.enrolled_courses = []
 
         for i in range(len(self.enrollment_history_df)):
@@ -16,7 +16,7 @@ class CourseInfo(StudentInfo):
         return self.enrolled_courses
 
     def first_term(self):
-        current_term = 1229
+        current_term = 1223
         semester = ''
         for i in range(len(self.enrollment_history_df)):
             if self.student_id == self.enrollment_history_df.loc[i, "ID"]:
@@ -44,4 +44,7 @@ class CourseInfo(StudentInfo):
                 catalog_term = term
             previous_term = term
 
+        return catalog_term
+
+    def get_catalogTerm(self, catalog_term):
         return catalog_term

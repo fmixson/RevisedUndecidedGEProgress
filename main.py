@@ -25,9 +25,9 @@ def degree_progess(student_id, enrollment_history_df, ge_plan, ge_plan_list):
     ge_dataframe = gereq.construct_ge_dataframe()
     # gereq.ge_courses_completed(ge_dataframe=ge_dataframe)
     socbeh = SocialBehavAreas(degree_applicable_dict=degree_applicable_courses, ge_dataframe=ge_dataframe)
-    print('ge plan list', ge_plan_list)
+    # print('ge plan list', ge_plan_list)
     for area in ge_plan_list:
-        print('area', area)
+        # print('area', area)
         if area == 'Electives':
             gereq.area_e_ge_requirements(ge_dataframe)
         if area == 'Reading_Proficiency':
@@ -40,7 +40,7 @@ def degree_progess(student_id, enrollment_history_df, ge_plan, ge_plan_list):
     geProgress = GEProgress(completed_ge_courses=geCoursesCompleted, completed_ge_units=ge_units_completed, student_id=id,
                             ge_plan_requirements=ge_plan_list)
     missing_ge_courses, geCoursesCompleted, ge_units_completed = geProgress.ge_requirements_completed()
-    print('missing', missing_ge_courses, 'completed', geCoursesCompleted, 'units', ge_units_completed)
+    # print('missing', missing_ge_courses, 'completed', geCoursesCompleted, 'units', ge_units_completed)
     ge_report = GECompletionReport(student_id,
                                    completed_ge_courses=geCoursesCompleted,
                                    missing_ge_courses=missing_ge_courses,
@@ -49,16 +49,17 @@ def degree_progess(student_id, enrollment_history_df, ge_plan, ge_plan_list):
                                    current_enrollment=enrolled_courses,
                                    first_term=semester,
                                    # all_count=all_courses,
-                                   passed_courses=degree_applicable_courses)
+                                   passed_courses=degree_applicable_courses,
+                                   catalog_term=catalogTerm)
     ge_report.ge_completion()
 
 
 planAList = ['Math_Proficiency', 'Writing_Proficiency', 'Health_Proficiency', 'Nat_Sci', 'Soc_Sci',
              'Beh_Sci', 'FA_Hum', 'Comp', 'Analytic', 'Electives', 'Reading_Proficiency']
-planBList = ['Oral_Comm', 'Writ_Comm', 'Crit_Think', 'Phys_Sci', 'Bio_Sci', 'Sci_Labs', 'Math', 'Arts', 'Hum', 'Arts_Hum',
-               'Amer_Hist', 'Amer_Gov', 'Institutions', 'Self_Dev']
-planBList21 = ['Oral_Comm', 'Writ_Comm', 'Crit_Think', 'Phys_Sci', 'Bio_Sci', 'Sci_Labs', 'Math', 'Arts', 'Hum', 'Arts_Hum',
-               'Amer_Hist_Gov', 'Institutions', 'Self_Dev', 'Ethnic_Stds']
+planBList = ['Oral_Comm', 'Writ_Comm', 'Crit_Think',  'Math', 'Arts', 'Hum', 'Arts_Hum',
+               'Amer_Hist', 'Amer_Gov', 'Institutions', 'Self_Dev', 'Phys_Sci', 'Bio_Sci', 'Sci_Labs',]
+planBList21 = ['Oral_Comm', 'Writ_Comm', 'Crit_Think', 'Math', 'Arts', 'Hum', 'Arts_Hum',
+               'Amer_Hist_Gov', 'Institutions', 'Self_Dev', 'Ethnic_Stds', 'Phys_Sci', 'Bio_Sci', 'Sci_Labs',]
 PlanCList = ['Comp', 'Crit_Think', 'Oral_Comm', 'Math', 'Arts', 'Hum', 'Arts_Hum', 'Soc_Behav1', 'Soc_Behav2', 'Soc_Behav3',
                'Phys_Sci', 'Bio_Sci', 'Sci_Labs']
 
@@ -68,7 +69,7 @@ enrollment_history_df = e.create_dataframe()
 # eligibleCoursesDF = e.eligible_courses_df()
 studID = StudentID(enrollment_history_df=enrollment_history_df)
 studIDList = studID.student_ids()
-print(studIDList)
+# print(studIDList)
 GePlans = ['PlanA', 'PlanB', 'PlanC']
 
 for id in studIDList:
@@ -76,13 +77,14 @@ for id in studIDList:
         coursInfo = CourseInfo(student_id=id, enrollment_history_df=enrollment_history_df)
         semester = coursInfo.first_term()
         catalogTerm = coursInfo.calculate_catalog_term()
-        print('plan', plan)
+        # print('plan', plan)
         if plan == 'PlanA':
-            print(plan)
+            # print(plan)
             degree_progess(student_id=id, enrollment_history_df=enrollment_history_df, ge_plan='PlanA_GE.csv',
                            ge_plan_list=planAList)
         if plan == 'PlanB':
-            print(plan)
+            # print(plan)
+            print('cat term', catalogTerm)
             if catalogTerm >= 1219:
                 degree_progess(student_id=id, enrollment_history_df=enrollment_history_df, ge_plan='PlanB_GE_2021.csv',
                                 ge_plan_list=planBList21)
@@ -90,6 +92,6 @@ for id in studIDList:
                 degree_progess(student_id=id, enrollment_history_df=enrollment_history_df, ge_plan='PlanB_GE.csv',
                                 ge_plan_list=planBList)
         if plan == 'PlanC':
-            print(plan)
+            # print(plan)
             degree_progess(student_id=id, enrollment_history_df=enrollment_history_df, ge_plan='PlanC_GE.csv', ge_plan_list=PlanCList)
 GECompletionReport.GE_Progress_df.to_csv('C:/Users/fmixson/Desktop/Undecided_GE_Draft.csv')

@@ -1,15 +1,16 @@
 from collections import Counter
+from Course_Info import CourseInfo
 
 import pandas as pd
 
 class GECompletionReport:
     columns = ['Student_ID', 'GE_Plan', 'GE_Status', 'Total_GE_Units', 'Missing_Num_GE_Courses', 'GE_Courses',
-               'Missing_GE_Area(s)', 'Current_Enrollment', 'First_Term', 'All_Courses', 'Passed_Courses']
+               'Missing_GE_Area(s)', 'Current_Enrollment', 'First_Term', 'Catalog_Term', 'All_Courses', 'Passed_Courses']
     GE_Progress_df = pd.DataFrame(columns=columns)
     total_missing = []
     flat_list = []
     def __init__(self, student_id, completed_ge_courses, missing_ge_courses, completed_ge_units, plan, current_enrollment,
-                 first_term, passed_courses):
+                 first_term, passed_courses, catalog_term):
         self.student_id = student_id
         self.completed_ge_courses = completed_ge_courses
         self.missing_ge_courses = missing_ge_courses
@@ -17,6 +18,7 @@ class GECompletionReport:
         self.plan = plan
         self.current_enrollment = current_enrollment
         self.first_term = first_term
+        self.catalog_term = catalog_term
         # self.all_count = all_count
         self.passed_courses = passed_courses
 
@@ -26,6 +28,8 @@ class GECompletionReport:
         print('missing ge', self.missing_ge_courses)
         GECompletionReport.GE_Progress_df.loc[length, 'Student_ID'] = self.student_id
         GECompletionReport.GE_Progress_df.loc[length, 'First_Term'] = self.first_term
+
+        GECompletionReport.GE_Progress_df.loc[length, 'Catalog_Term'] = self.catalog_term
 
         # total_ge_units = sum(self.completed_ge_units)
         totalGEUnits = sum(item['units'] for item in self.completed_ge_units)
