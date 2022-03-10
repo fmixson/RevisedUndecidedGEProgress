@@ -1,7 +1,9 @@
 import pandas as pd
 
 class GeRequirements:
-
+    proficiencies = ['Math_Proficiency', 'Writing_Proficiency', 'Health_Proficiency', 'Reading Proficiency',
+                     'Phys_Sci',
+                     'Bio_Sci']
 
     def __init__(self, degree_applicable_dict, ge_plan):
         self.degree_applicable_dict = degree_applicable_dict
@@ -24,7 +26,10 @@ class GeRequirements:
 
 
     def ge_courses_completed(self, area_name, ge_dataframe):
-        proficiencies = ['Math_Proficiency', 'Writing_Proficiency', 'Health_Proficiency', 'Reading Proficiency', 'Phys_Sci', 'Bio_Sci' ]
+        # # proficiencies = ['Math_Proficiency', 'Writing_Proficiency', 'Health_Proficiency', 'Reading Proficiency',
+        #                  'Phys_Sci',
+        #                  'Bio_Sci']
+
         for i in range(len(ge_dataframe[area_name])):
             for key in self.degree_applicable_dict:
                 if key == ge_dataframe.loc[i, area_name]:
@@ -34,11 +39,13 @@ class GeRequirements:
 
                         if key not in self.ge_course_list:
                             self.completed_ge_courses[area_name] = {'course': key, 'units': self.degree_applicable_dict[key]['units']}
-                            self.completed_ge_units.append(self.degree_applicable_dict[key])
+                            if area_name not in GeRequirements.proficiencies:
+                                self.completed_ge_units.append(self.degree_applicable_dict[key])
                             ge_units_total = sum(d['units'] for d in self.completed_ge_courses.values()if d)
-                            if area_name not in proficiencies:
-                                self.ge_course_list.append(key)
-                                    # [d['course'] for d in self.completed_ge_courses.values() if d]
+                            # if area_name not in proficiencies:
+                            #     self.ge_course_list.append(key)
+                            self.ge_course_list = [self.completed_ge_courses[x]['course'] for x in self.completed_ge_courses
+                                                   if x not in GeRequirements.proficiencies]
         print(self.completed_ge_courses)
         return self.completed_ge_courses, self.completed_ge_units
 
@@ -54,12 +61,18 @@ class GeRequirements:
         area_e_list = []
         print('units', self.completed_ge_units)
         totalGEUnits=sum(item['units'] for item in self.completed_ge_units)
+        totalGEUnitsTest=sum(self.completed_ge_courses[x]['units'] for x in self.completed_ge_courses if x
+                             not in GeRequirements.proficiencies)
+        print(totalGEUnitsTest, totalGEUnits)
         # total_ge_units = sum(self.completed_ge_units)
         for i in range(len(ge_dataframe['Electives'])):
             for key in self.degree_applicable_dict:
                 if key == ge_dataframe.loc[i, 'Electives']:
                     if len(self.completed_ge_courses) == 9:
+                        print('len of ge', len(self.completed_ge_courses))
+                        print('total units', totalGEUnits)
                         if totalGEUnits < 18:
+                            print('below if total', totalGEUnits)
                             area_e_list.append(key)
                             self.completed_ge_courses['AreaE'] = area_e_list
                             self.completed_ge_units.append(self.degree_applicable_dict[key])
