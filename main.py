@@ -56,8 +56,8 @@ def degree_progess(student_id, enrollment_history_df, ge_plan, ge_plan_list):
 
 planAList = ['Math_Proficiency', 'Writing_Proficiency', 'Health_Proficiency', 'Nat_Sci', 'Soc_Sci',
              'Beh_Sci', 'FA_Hum', 'Comp', 'Analytic', 'Electives', 'Reading_Proficiency']
-planBList = ['Oral_Comm', 'Writ_Comm', 'Crit_Think',  'Math', 'Arts', 'Hum', 'Arts_Hum',
-               'Amer_Hist', 'Amer_Gov', 'Institutions', 'Self_Dev', 'Phys_Sci', 'Bio_Sci', 'Sci_Labs',]
+planBList = ['Oral_Comm', 'Writ_Comm', 'Crit_Think',  'Math', 'Arts', 'Amer_Hist', 'Hum', 'Arts_Hum',
+            'Amer_Gov', 'Institutions', 'Self_Dev', 'Phys_Sci', 'Bio_Sci', 'Sci_Labs',]
 planBList21 = ['Oral_Comm', 'Writ_Comm', 'Crit_Think', 'Math', 'Arts', 'Hum', 'Arts_Hum',
                'Amer_Hist_Gov', 'Institutions', 'Self_Dev', 'Ethnic_Stds', 'Phys_Sci', 'Bio_Sci', 'Sci_Labs',]
 PlanCList = ['Comp', 'Crit_Think', 'Oral_Comm', 'Math', 'Arts', 'Hum', 'Arts_Hum', 'Soc_Behav1', 'Soc_Behav2', 'Soc_Behav3',
